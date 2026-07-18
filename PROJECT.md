@@ -43,7 +43,7 @@ Objetivos:
 - Configurar las herramientas necesarias.
 
 Estado:
-- En progreso
+- Completada
 
 ---
 
@@ -156,4 +156,4 @@ Cada decisión técnica deberá incluir una explicación de por qué fue tomada.
 
 Fase activa:
 
-Fase 0
+Fase 1

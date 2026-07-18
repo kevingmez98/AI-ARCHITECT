@@ -26,3 +26,5 @@ Esta tarea únicamente consiste en diseñar el flujo.
 ## Criterios de aceptación
 
 La tarea estará completa cuando exista un documento que describa el flujo completo de captura de requerimientos.
+
+Estado: Completada
