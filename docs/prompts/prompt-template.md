@@ -2,7 +2,7 @@ Lee AGENTS.md para conocer las reglas del proyecto.
 
 Lee PROJECT.md para conocer el estado actual del proyecto.
 
-Lee task-004.
+Lee task-005.
 
 Realiza únicamente esa tarea.
 
