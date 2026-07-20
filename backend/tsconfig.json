@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "module": "nodenext", // Compila con node moderno
+    "moduleResolution": "nodenext",
+    "resolvePackageJsonExports": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "declaration": true, // genera archivos .d.ts
+    "removeComments": true,
+    "emitDecoratorMetadata": true, // genera información de los tipos
+    "experimentalDecorators": true, // permite el uso de decoradores
+    "allowSyntheticDefaultImports": true,
+    "target": "ES2023", // No convierte a js antiguo
+    "sourceMap": true,
+    "outDir": "./dist", // Define donde termina lo compilado
+    "incremental": true, // permite solo compilar lo que cambió
+    "skipLibCheck": true,
+    "strictNullChecks": true, // evita que se pueda asignar null a strings entre otros
+    "forceConsistentCasingInFileNames": true,
+    "types": ["node", "jest"],
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "noFallthroughCasesInSwitch": false,
+    "paths": { // evita tener que importar direcciones directas
+      "@common/*": ["./src/common/*"],
+      "@modules/*": ["./src/modules/*"],
+      "@database/*": ["./src/database/*"],
+      "@integrations/*": ["./src/integrations/*"]
+    }
+  }
+}
