@@ -256,16 +256,85 @@ Usuario → Frontend → Servicio de Supuestos
 
 ---
 
-## Tecnologías
+## Stack Tecnológico y Versionado
 
-| Capa | Tecnología | Justificación |
-|------|------------|---------------|
-| Frontend | React + TypeScript | Ecosistema robusto, tipado estático, componentes reutilizables |
-| Estilos | Tailwind CSS | Desarrollo ágil, diseño responsive sin framework pesado |
-| Backend | NestJS + TypeScript | Arquitectura modular, inyección de dependencias, mismo lenguaje que frontend |
-| Base de datos | MariaDB | Relacional, compatible MySQL, maduro, buen rendimiento |
-| LLM | API externa (OpenAI/Claude) | Flexibilidad para cambiar proveedor, acceso a modelos de última generación |
-| Comunicación | HTTP REST + WebSocket | REST para operaciones puntuales, WebSocket para chat en tiempo real |
+### Estado actual del proyecto
+
+Las siguientes tablas reflejan las versiones declaradas en el código fuente y las versiones objetivo para componentes aún no incorporados.
+
+#### Backend — dependencias instaladas
+
+| Componente | Paquete | Versión declarada | Última estable | Notas |
+|---|---|---|---|---|
+| Runtime | Node.js | No fijada (`@types/node: ^24.0.0`) | 24.18.0 LTS | Active LTS hasta Oct 2028 |
+| Framework | `@nestjs/common` | `^11.0.1` | 11.1.28 | Línea estable activa |
+| Framework | `@nestjs/core` | `^11.0.1` | 11.1.28 | Línea estable activa |
+| Framework | `@nestjs/platform-express` | `^11.0.1` | 11.1.28 | Plataforma HTTP |
+| Config | `@nestjs/config` | `^4.0.4` | 4.0.4 | Variables de entorno |
+| Lenguaje | TypeScript | `^5.7.3` | 5.9.x | Compilador |
+| Reactividad | RxJS | `^7.8.1` | 7.8.2 | Usado internamente por NestJS |
+| Metadatos | reflect-metadata | `^0.2.2` | 0.2.2 | Decoradores |
+| Testing | Jest | `^30.0.0` | 30.4.2 | Framework de tests |
+| Testing | ts-jest | `^29.2.5` | 29.2.5 | Transform TS para Jest |
+| Testing | Supertest | `^7.0.0` | 7.0.0 | Tests HTTP/E2E |
+| Linting | ESLint | `^9.18.0` | 9.18.0 | Análisis estático |
+| Formato | Prettier | `^3.4.2` | 3.4.2 | Formateo de código |
+| CLI | `@nestjs/cli` | `^11.0.0` | 11.1.28 | Herramientas de línea de comandos |
+
+#### Backend — componentes objetivo (pendientes de incorporar)
+
+| Componente | Paquete | Versión objetivo | Justificación |
+|---|---|---|---|
+| ORM | Prisma (`prisma` + `@prisma/client`) | `~6.19.0` | Última versión de la línea 6.x, estable y con amplia adopción. Prisma 7.x es reciente (breaking changes significativos). 6.19 soporta MariaDB y es SemVer estricto |
+| Base de datos | MariaDB | `11.8` (LTS) | LTS con soporte comunitario hasta Jun 2028 y enterprise hasta Oct 2033. 12.3 LTS es demasiado reciente (May 2026). 10.11 sin nuevas features |
+| Contenedorización | Docker | `29.x` | Versión estable actual con soporte de seguridad activo. 28.x perdió soporte en May 2026 |
+| Comunicación | `@nestjs/websockets` + `@nestjs/platform-socket.io` | `^11.1.0` | WebSocket Gateway para chat en tiempo real |
+
+#### Frontend — componentes objetivo (pendientes de incorporar)
+
+| Componente | Paquete | Versión objetivo | Justificación |
+|---|---|---|---|
+| UI Framework | React | `~19.2.0` | Línea estable actual con soporte activo. React 18 sin nuevas features |
+| Estilos | Tailwind CSS | `~4.3.0` | Última versión con soporte activo. Tailwind 4.x es rewrite CSS-first. Tailwind 3.4 con soporte hasta Feb 2027 |
+| Bundler | Vite | `~6.x` | Estándar de facto para proyectos React nuevos |
+| HTTP Client | Axios o fetch nativo | TBD | Pendiente de decisión |
+
+### Convención de fijación de versiones
+
+| Símbolo | Significado | Cuándo usar |
+|---|---|---|
+| `~x.y.0` | Solo patches (`x.y.z`) | Dependencias de runtime críticas (NestJS, Prisma, TypeScript) |
+| `^x.0.0` | Minors y patches (`x.y.z`) | Herramientas de dev (ESLint, Prettier) |
+| `x` (sin símbolo) | Solo mayor | Docker images, Node.js engines |
+
+### Compatibilidad entre versiones
+
+```
+Node.js 24.x LTS
+  ├── NestJS 11.1.x  (requiere Node >= 20)
+  ├── TypeScript 5.9.x  (requiere Node >= 18)
+  ├── Prisma 6.19.x  (requiere Node ^20.19 o ^22.12 o >= 24)
+  └── Jest 30.x  (requiere Node >= 18)
+
+TypeScript 5.9.x
+  ├── ts-jest 29.x  (compatibilidad verificada con TS 5.x)
+  ├── @types/node 24.x  (alineado con Node.js 24)
+  └── Prisma 6.19.x  (requiere TS >= 4.7)
+```
+
+### Stack completo
+
+| Capa | Tecnología | Estado | Justificación |
+|---|---|---|---|
+| Runtime | Node.js 24.x LTS | Pendiente de fijar | Active LTS con soporte hasta 2028 |
+| Frontend | React + TypeScript | Pendiente de instalar | Ecosistema robusto, tipado estático, componentes reutilizables |
+| Estilos | Tailwind CSS 4.3.x | Pendiente de instalar | Desarrollo ágil, diseño responsive sin framework pesado |
+| Backend | NestJS 11.x + TypeScript | Instalado | Arquitectura modular, inyección de dependencias, mismo lenguaje que frontend |
+| ORM | Prisma 6.19.x | Pendiente de instalar | Type-safe queries, migraciones declarativas, soporte MariaDB |
+| Base de datos | MariaDB 11.8 LTS | Pendiente de instalar | Relacional, compatible MySQL, LTS con soporte prolongado |
+| Contenedores | Docker 29.x | Pendiente de configurar | Estandarización del entorno de despliegue |
+| LLM | API externa (OpenAI/Claude) | Pendiente de integrar | Flexibilidad para cambiar proveedor, acceso a modelos de última generación |
+| Comunicación | HTTP REST + WebSocket | REST instalado, WS pendiente | REST para operaciones puntuales, WebSocket para chat en tiempo real |
 
 ---
 
@@ -356,9 +425,45 @@ backend/src/
 
 ## Decisiones Pendientes
 
-Las siguientes áreas serán definidas en fases posteriores:
+Las siguientes áreas serán definidas e implementadas en fases posteriores:
 
-### Gestión de Usuarios, Autenticación y Autorización
+### 1. Inicialización del Frontend
+
+El directorio `frontend/` existe pero está vacío. No hay `package.json`, ni fuente, ni configuración.
+
+**Qué se definirá en futuro:**
+- Inicializar proyecto React con Vite.
+- Configurar Tailwind CSS 4.x.
+- Definir estructura de componentes y routing.
+- Establecer cliente HTTP para comunicación con el backend.
+
+**Justificación:** El frontend se implementa después de tener un backend funcional que sirva como contrato de la API.
+
+### 2. ORM y Capa de Persistencia
+
+No hay ORM instalado ni configuración de base de datos en el proyecto.
+
+**Qué se definirá en futuro:**
+- Instalar y configurar Prisma 6.19.x con schema inicial.
+- Definir entidades de persistencia (conversations, messages, requirements, assumptions, designs, documents).
+- Configurar conexión a MariaDB 11.8 LTS.
+- Implementar migraciones y seeds iniciales.
+
+**Justificación:** La capa de persistencia se incorpora cuando los módulos de negocio están definidos y se necesita almacenamiento real.
+
+### 3. Contenedorización
+
+No hay archivos Docker en el proyecto.
+
+**Qué se definirá en futuro:**
+- Dockerfile para el backend (multi-stage build con Node.js 24.x).
+- docker-compose.yml con servicios backend y MariaDB 11.8.
+- .dockerignore optimizado.
+- Variables de entorno para entornos de desarrollo y producción.
+
+**Justificación:** Docker se configura una vez que el backend es funcional, para estandarizar el entorno de desarrollo y despliegue.
+
+### 4. Gestión de Usuarios, Autenticación y Autorización
 
 El alcance actual del sistema no incluye gestión de usuarios ni mecanismos de autenticación. Por diseño, la arquitectura está preparada para incorporar esta funcionalidad sin modificar los componentes existentes.
 

@@ -1,0 +1,19 @@
+services:
+  mariadb:
+    image: mariadb:11.8
+    container_name: arquitecto-db
+
+    ports:
+      - "3306:3306"
+
+    env_file:
+      - .env
+
+    volumes:
+      - arquitecto-db-data:/var/lib/mysql
+
+    restart: unless-stopped
+volumes:
+  arquitecto-db-data:
+
+  

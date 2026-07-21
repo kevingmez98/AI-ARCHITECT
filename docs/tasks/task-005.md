@@ -46,4 +46,4 @@ El documento deberá incluir, como mínimo:
 
 La tarea estará completa cuando exista un documento que describa el modelo relacional del sistema y pueda utilizarse posteriormente para implementar la base de datos en MariaDB.
 
-Estado: Pendiente
+Estado: Completada
