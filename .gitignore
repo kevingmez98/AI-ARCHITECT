@@ -1,13 +1,21 @@
+# Dependencies
 node_modules/
 
+# Environment variables
 .env
 infrastructure/docker/.env
 
+# Build output
 dist/
 
+# Test coverage
 coverage/
 
+# Logs
 *.log
+
+# Prisma generated client
+**/src/generated/prisma/
 
 # IDE
 .vscode/
